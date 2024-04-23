@@ -3,6 +3,7 @@ from tkinter import filedialog, messagebox
 import os
 import spacy
 import matplotlib.pyplot as plt
+from docx import Document
 
 # Load the spaCy English model
 nlp = spacy.load("en_core_web_sm")
@@ -56,20 +57,53 @@ def convert_to_pdf(text_file):
 
     print(f"PDF file saved as: {pdf_file}")
 
-# Function to open a file dialog and get the file path
-def open_file():
+def convert_to_docx(text_file):
+    document = Document()
+    with open(text_file, 'r') as file:
+        content = file.read()
+        document.add_paragraph(content)
+    
+    docx_file = os.path.splitext(text_file)[0] + '.docx'
+    document.save(docx_file)
+    print(f"Word document saved as: {docx_file}")
+
+# Function to open a file dialog and get the file path for PDF conversion
+def open_file_for_pdf():
     file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
     if file_path:
         convert_to_pdf(file_path)
         messagebox.showinfo("Success", f"PDF file has been created successfully!")
 
+# Function to open a file dialog and get the file path for Word conversion
+def open_file_for_docx():
+    file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
+    if file_path:
+        convert_to_docx(file_path)
+        messagebox.showinfo("Success", f"Word document has been created successfully!")
+
 # Set up the main application window
 root = tk.Tk()
-root.title("Text to PDF Converter")
+root.title("File Converter")
 
-# Add a button to open the file dialog
-open_button = tk.Button(root, text="Open Text File", command=open_file)
-open_button.pack(expand=True)
+# Window set-up
+root.geometry('600x300')  # Width x Height
+root.configure(bg='White')
+
+# Configure the button size and font size to make them bigger
+button_options = {
+    'padx': 10,  # Add some padding on x axis
+    'pady': 10,  # Add some padding on y axis
+    'font': ('Roboto', 16),  # Increase the font size
+    'bg': 'White'
+}
+
+# Add a button to open the file dialog for PDF conversion
+open_button_pdf = tk.Button(root, text="Convert Text to PDF", command=open_file_for_pdf, **button_options)
+open_button_pdf.pack(expand=True)
+
+# Add a button to open the file dialog for Word conversion
+open_button_docx = tk.Button(root, text="Convert Text to Word", command=open_file_for_docx, **button_options)
+open_button_docx.pack(expand=True)
 
 # Start the Tkinter event loop
 root.mainloop()
