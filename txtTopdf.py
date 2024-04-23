@@ -81,9 +81,43 @@ def open_file_for_docx():
         convert_to_docx(file_path)
         messagebox.showinfo("Success", f"Word document has been created successfully!")
 
+# Function to open a file dialog and get the file path for HTML conversion
+def open_file_for_html():
+    file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
+    if file_path:
+        convert_to_html(file_path)
+        messagebox.showinfo("Success", f"HTML file has been created successfully!")
+
+def convert_to_html(text_file):
+    with open(text_file, 'r') as file:
+        content = file.read()
+    
+    # Escape HTML characters in content
+    content = content.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+    # Wrap content in basic HTML structure
+    html_content = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<pre>{content}</pre>
+</body>
+</html>
+'''
+
+    html_file = os.path.splitext(text_file)[0] + '.html'
+    with open(html_file, 'w') as file:
+        file.write(html_content)
+    
+    print(f"HTML file saved as: {html_file}")
+
 # Set up the main application window
 root = tk.Tk()
-root.title("File Converter")
+root.title("Text-File Converter")
 
 # Window set-up
 root.geometry('600x300')  # Width x Height
@@ -104,6 +138,10 @@ open_button_pdf.pack(expand=True)
 # Add a button to open the file dialog for Word conversion
 open_button_docx = tk.Button(root, text="Convert Text to Word", command=open_file_for_docx, **button_options)
 open_button_docx.pack(expand=True)
+
+# Add a button for html conversion.
+open_button_html = tk.Button(root, text="Convert Text to HTML", command=open_file_for_html, **button_options)
+open_button_html.pack(expand=True)
 
 # Start the Tkinter event loop
 root.mainloop()
