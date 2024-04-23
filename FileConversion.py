@@ -8,7 +8,6 @@ from docx import Document
 # Load the spaCy English model
 nlp = spacy.load("en_core_web_sm")
 
-# Define your existing functions here
 def extract_headers(text):
     doc = nlp(text)
     # Find sentences starting with capital letters
