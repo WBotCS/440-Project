@@ -36,16 +36,15 @@ def convert_to_pdf(text_file):
 
     # Check if there are headers
     if headers:
-        # Render headers with a larger font size
-        ax.text(0.5, 0.9, headers, fontsize=16, ha='center')
-
+        # Render headers with a larger font size and left alignment
+        ax.text(0.1, 0.9, headers, fontsize=16, ha='left')
     # Check if the extracted function is empty (no mathematical expressions)
-    if function:
+    elif function:
         # Use LaTeX rendering for mathematical expressions
-        ax.text(0.5, 0.5, f"${function}$", fontsize=12, ha='center')
+        ax.text(0.1, 0.5, f"${function}$", fontsize=12, ha='left')
     else:
         # Use default text rendering for general text
-        ax.text(0.5, 0.5, function_text, fontsize=12, ha='center')
+        ax.text(0.1, 0.5, function_text, fontsize=12, ha='left')
 
     ax.axis('off')
 
@@ -55,6 +54,7 @@ def convert_to_pdf(text_file):
     plt.close()
 
     print(f"PDF file saved as: {pdf_file}")
+
 
 
 def convert_to_docx(text_file):
