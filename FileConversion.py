@@ -4,7 +4,11 @@ import os
 import spacy
 import matplotlib.pyplot as plt
 from docx import Document
+from docx.shared import Pt
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from docx.oxml import OxmlElement
 
+#BEGIN PDF CODE
 # Load the spaCy English model
 nlp = spacy.load("en_core_web_sm")
 
@@ -26,6 +30,14 @@ def extract_function(text):
     # Find mathematical expressions using dependency parsing
     math_expressions = [token.text for token in doc if token.dep_ == "amod"]
     return " ".join(math_expressions)
+
+
+# Function to open a file dialog and get the file path for PDF conversion
+def open_file_for_pdf():
+    file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
+    if file_path:
+        convert_to_pdf(file_path)
+        messagebox.showinfo("Success", f"PDF file has been created successfully!")
 
 def convert_to_pdf(text_file):
     # Read the text file
@@ -61,26 +73,9 @@ def convert_to_pdf(text_file):
     plt.close()
 
     print(f"PDF file saved as: {pdf_file}")
+#END PDF CODE
 
-
-
-def convert_to_docx(text_file):
-    document = Document()
-    with open(text_file, 'r') as file:
-        content = file.read()
-        document.add_paragraph(content)
-    
-    docx_file = os.path.splitext(text_file)[0] + '.docx'
-    document.save(docx_file)
-    print(f"Word document saved as: {docx_file}")
-
-# Function to open a file dialog and get the file path for PDF conversion
-def open_file_for_pdf():
-    file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
-    if file_path:
-        convert_to_pdf(file_path)
-        messagebox.showinfo("Success", f"PDF file has been created successfully!")
-
+#BEGIN DOCX CODE
 # Function to open a file dialog and get the file path for Word conversion
 def open_file_for_docx():
     file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
@@ -88,6 +83,65 @@ def open_file_for_docx():
         convert_to_docx(file_path)
         messagebox.showinfo("Success", f"Word document has been created successfully!")
 
+def apply_heading_style(paragraph):
+    paragraph.style = 'Heading 1'
+
+def apply_list_style(paragraph):
+    paragraph.style = 'List Bullet'
+
+def apply_title_style(paragraph):
+
+  paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+
+  paragraph_format = paragraph.paragraph_format
+  paragraph_format.space_before = Pt(24)
+
+  run = paragraph.runs[0]
+  font = run.font
+  font.bold = True
+  font.size = Pt(24)
+
+
+
+def convert_to_docx(text_file):
+
+  document = Document()
+
+  # Read first line as title
+  with open(text_file) as file:
+    title = next(file).strip()
+    paragraph = document.add_paragraph(title)
+    apply_title_style(paragraph)
+
+  # Process rest of lines
+  with open(text_file) as file:
+    for line in file:
+      line = line.strip()
+      
+      if not line:
+        continue
+      
+      if line.startswith('#'):
+        paragraph = document.add_paragraph(line.strip('#').strip())
+        apply_heading_style(paragraph)
+      
+      elif line.startswith('- '):
+        paragraph = document.add_paragraph(line.strip('- ').strip())  
+        apply_list_style(paragraph)
+      
+      else:
+        paragraph = document.add_paragraph(line)
+        
+  # Save docx
+  docx_file = os.path.splitext(text_file)[0] + '.docx'
+  document.save(docx_file)
+
+  print(f"Word document saved as: {docx_file}")
+
+
+
+
+#BEGIN HTML CODE
 # Function to open a file dialog and get the file path for HTML conversion
 def open_file_for_html():
     file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
@@ -121,7 +175,9 @@ def convert_to_html(text_file):
         file.write(html_content)
     
     print(f"HTML file saved as: {html_file}")
+#END HTML CODE
 
+#BEGIN APP CODE
 # Set up the main application window
 root = tk.Tk()
 root.title("Text-File Converter")
@@ -152,3 +208,4 @@ open_button_html.pack(expand=True)
 
 # Start the Tkinter event loop
 root.mainloop()
+#END APP CODE
