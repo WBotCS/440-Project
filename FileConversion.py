@@ -31,8 +31,8 @@ def convert_to_pdf(text_file):
     # Extract the function
     function = extract_function(function_text)
 
-    # Create a plot using matplotlib
-    fig, ax = plt.subplots()
+    # Create a plot using matplotlib with a fixed figure size
+    fig, ax = plt.subplots(figsize=(8.27, 11.69))  # A4 size (approx.)
 
     # Check if there are headers
     if headers:
@@ -55,6 +55,7 @@ def convert_to_pdf(text_file):
     plt.close()
 
     print(f"PDF file saved as: {pdf_file}")
+
 
 def convert_to_docx(text_file):
     document = Document()
