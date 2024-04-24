@@ -107,35 +107,36 @@ def convert_to_docx(text_file):
 
   document = Document()
 
-  # Read first line as title
+  # Read first line and add as title
   with open(text_file) as file:
-    title = next(file).strip()
-    paragraph = document.add_paragraph(title)
+    first_line = next(file).strip()
+    paragraph = document.add_paragraph(first_line)
     apply_title_style(paragraph)
 
-  # Process rest of lines
-  with open(text_file) as file:
+  # Read rest of lines    
+  with open(text_file) as file:  
     for line in file:
       line = line.strip()
-      
+
       if not line:
-        continue
-      
+        continue 
+
       if line.startswith('#'):
         paragraph = document.add_paragraph(line.strip('#').strip())
         apply_heading_style(paragraph)
-      
-      elif line.startswith('- '):
-        paragraph = document.add_paragraph(line.strip('- ').strip())  
+
+      elif line.startswith('- '):  
+        paragraph = document.add_paragraph(line.strip('- ').strip())
         apply_list_style(paragraph)
-      
+
       else:
-        paragraph = document.add_paragraph(line)
-        
-  # Save docx
+        document.add_paragraph(line)
+
+      document.add_paragraph()
+
+  # Save docx file
   docx_file = os.path.splitext(text_file)[0] + '.docx'
   document.save(docx_file)
-
   print(f"Word document saved as: {docx_file}")
 
 
