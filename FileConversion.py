@@ -10,9 +10,16 @@ nlp = spacy.load("en_core_web_sm")
 
 def extract_headers(text):
     doc = nlp(text)
-    # Find sentences starting with capital letters
-    headers = [sent.text.strip() for sent in doc.sents if sent.text[0].isupper()]
+    headers = []
+    for sent in doc.sents:
+        # Check if the sentence starts with a capital letter and has a colon
+        if sent.text.strip() and sent.text[0].isupper() and ':' in sent.text:
+            headers.append(sent.text.strip())
+        # Or check if the sentence starts with a capital letter and has a length longer than a certain threshold
+        elif sent.text.strip() and sent.text[0].isupper() and len(sent.text.split()) > 3:
+            headers.append(sent.text.strip())
     return "\n".join(headers)
+
 
 def extract_function(text):
     doc = nlp(text)
