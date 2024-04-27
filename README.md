@@ -4,6 +4,9 @@
 
 This application provides a user interface that allows users to select a text file and convert it into PDF, Word, or HTML format. The conversion preserves text formatting and provides additional document customization features.
 
+## Notebook Link:
+https://colab.research.google.com/drive/1z1JqeeNXJ3maCIA6dfhKRCBbMgrLqlap?usp=sharing
+
 ## Installation
 
 Before running the application, ensure you have Python 3 installed on your system. You can download Python 3 from the official website: https://www.python.org/downloads/
