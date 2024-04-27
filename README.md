@@ -25,6 +25,7 @@ Follow these steps to set up your environment:
     python3 -m pip install matplotlib
 
 
-**Running the application**:
+**Running the application through VSCode/Console**:
 
     python3 FileConversion.py
+
