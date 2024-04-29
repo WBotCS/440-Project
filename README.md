@@ -25,15 +25,19 @@ Follow these steps to set up your environment:
    python3 -m spacy download en_core_web_sm
 
 2. **Install docx library**:
-    python3 -m pip install python-docx
 
-3. **Install matplotlib library**:
-    python3 -m pip install matplotlib
+   python3 -m pip install python-docx
 
-4. **Install bs4 library**:
+4. **Install matplotlib library**:
+
+   python3 -m pip install matplotlib
+
+5. **Install bs4 library**:
+
     pip3 install bs4
 
-5. **Install pyPDF2
+6. **Install pyPDF2
+
    pip3 install pyPDF2
    
 **Running the application through VSCode/Console**:
