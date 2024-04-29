@@ -6,6 +6,7 @@ This application provides a user interface that allows users to select a text fi
 
 ## Presentation & Tutorial Link:
 https://youtu.be/vIbzwthvJm4
+https://docs.google.com/presentation/d/1-VZHwqcRcU1HTDdZ6ftY2WAdNy-JlIF0WhlCzO-2hg0/edit?usp=sharing
 
 ## Code Documentation Link:
 https://docs.google.com/document/d/1Ni5S21mc3GQFdXF8zx1EQNk5rXSwqhwHt5IMnFTRjCQ/edit
