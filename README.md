@@ -26,18 +26,22 @@ Follow these steps to set up your environment:
 
 2. **Install docx library**:
 
+   ```bash
    python3 -m pip install python-docx
 
 4. **Install matplotlib library**:
-
+   
+   ```bash
    python3 -m pip install matplotlib
 
-5. **Install bs4 library**:
+6. **Install bs4 library**:
 
+   ```bash
     pip3 install bs4
 
-6. **Install pyPDF2
+7. **Install pyPDF2
 
+   ```bash
    pip3 install pyPDF2
    
 **Running the application through VSCode/Console**:
