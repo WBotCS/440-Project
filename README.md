@@ -27,10 +27,15 @@ Follow these steps to set up your environment:
 2. **Install docx library**:
     python3 -m pip install python-docx
 
-2. **Install matplotlib library**:
+3. **Install matplotlib library**:
     python3 -m pip install matplotlib
 
+4. **Install bs4 library**:
+    pip3 install bs4
 
+5. **Install pyPDF2
+   pip3 install pyPDF2
+   
 **Running the application through VSCode/Console**:
 
     python3 FileConversion.py
