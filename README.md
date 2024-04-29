@@ -7,7 +7,8 @@ This application provides a user interface that allows users to select a text fi
 ## Presentation & Tutorial Link:
 https://youtu.be/vIbzwthvJm4
 
-## Documentation Link:
+## Code Documentation Link:
+https://docs.google.com/document/d/1Ni5S21mc3GQFdXF8zx1EQNk5rXSwqhwHt5IMnFTRjCQ/edit
 
 ## Notebook Link:
 https://colab.research.google.com/drive/1z1JqeeNXJ3maCIA6dfhKRCBbMgrLqlap?usp=sharing
