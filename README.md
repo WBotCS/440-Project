@@ -39,7 +39,7 @@ Follow these steps to set up your environment:
    ```bash
     pip3 install bs4
 
-7. **Install pyPDF2
+7. **Install pyPDF2**:
 
    ```bash
    pip3 install pyPDF2
