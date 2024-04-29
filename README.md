@@ -7,6 +7,8 @@ This application provides a user interface that allows users to select a text fi
 ## Presentation & Tutorial Link:
 https://youtu.be/tLf3LXfgBbU
 
+## Documentation Link:
+
 ## Notebook Link:
 https://colab.research.google.com/drive/1z1JqeeNXJ3maCIA6dfhKRCBbMgrLqlap?usp=sharing
 
